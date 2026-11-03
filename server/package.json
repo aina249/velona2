@@ -1,0 +1,19 @@
+{
+  "name": "velona-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API Vélona : suivi nutritionnel, repas livrés, facturation",
+  "main": "src/index.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/index.js",
+    "migrate": "node src/migrate.js",
+    "seed:admin": "node src/seed.js --admin --meals --hours",
+    "seed:kitchen": "node src/seed.js --kitchen",
+    "seed:demo": "node src/seed.js --admin --demo --kitchen",
+    "test": "node test/api.test.js"
+  },
+  "optionalDependencies": {
+    "pg": "^8.13.0"
+  }
+}

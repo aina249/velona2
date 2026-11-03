@@ -1,0 +1,5 @@
+# Caddy : HTTPS automatique (certificat Let's Encrypt) devant l'application
+app.velona.mg {
+  encode gzip
+  reverse_proxy 127.0.0.1:3000
+}
