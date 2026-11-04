@@ -51,7 +51,7 @@ export default function Home() {
           <h1 className="vac-h1">
             Mangez mieux.
             <br />
-            <span style={{ color: "#C25E33" }}>Sentez-vous vivant.</span>
+            <span style={{ color: "var(--terra)" }}>Sentez-vous vivant.</span>
           </h1>
           <p className="vac-lead">
             Bilan nutritionnel, suivi chaque semaine sur l'application et repas
@@ -113,11 +113,11 @@ export default function Home() {
       <section className="vac-confiance">
         <div className="vac-confiance-inner">
           <span>Bilan personnalisé de 60 min</span>
-          <span style={{ color: "#F2B595" }}>•</span>
+          <span style={{ color: "var(--terra-soft)" }}>•</span>
           <span>Check-in chaque semaine</span>
-          <span style={{ color: "#F2B595" }}>•</span>
+          <span style={{ color: "var(--terra-soft)" }}>•</span>
           <span>Repas livrés à Tana</span>
-          <span style={{ color: "#F2B595" }}>•</span>
+          <span style={{ color: "var(--terra-soft)" }}>•</span>
           <span>Paiement mobile money</span>
         </div>
       </section>
@@ -296,7 +296,7 @@ export default function Home() {
                 height="38"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#C25E33"
+                stroke="var(--terra)"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -316,7 +316,7 @@ export default function Home() {
                 height="38"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#C25E33"
+                stroke="var(--terra)"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -335,7 +335,7 @@ export default function Home() {
                 height="38"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#C25E33"
+                stroke="var(--terra)"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -354,7 +354,7 @@ export default function Home() {
                 height="38"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#C25E33"
+                stroke="var(--terra)"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -386,7 +386,7 @@ export default function Home() {
                     width: "12px",
                     height: "12px",
                     borderRadius: "50%",
-                    background: "#2E9E6A",
+                    background: "var(--green)",
                     display: "inline-block",
                   }}
                 />
@@ -400,7 +400,7 @@ export default function Home() {
               <h2 className="vac-h2">Annick Tchuidjang</h2>
               <p
                 className="vac-nutritionniste-sub"
-                style={{ fontWeight: "600", color: "#4A4843" }}
+                style={{ fontWeight: "600", color: "var(--ink-2)" }}
               >
                 Nutritionniste, fondatrice de Vélona
               </p>
@@ -509,7 +509,7 @@ export default function Home() {
               <Link to="/contact" className="vac-footer-link">
                 Confidentialité
               </Link>
-              <span style={{ color: "#B8B3A9", margin: "0 6px" }}>·</span>
+              <span style={{ color: "var(--muted)", margin: "0 6px" }}>·</span>
               <Link to="/contact" className="vac-footer-link">
                 Mentions légales
               </Link>
