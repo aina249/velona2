@@ -75,7 +75,12 @@ export function Link({
           return;
         e.preventDefault();
         if (onClick) onClick(e);
-        navigate(to);
+        if (to.startsWith("#")) {
+          const el = document.getElementById(to.slice(1));
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        } else {
+          navigate(to);
+        }
       }}
       {...rest}
     >
