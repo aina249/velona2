@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "plantuml-skill": {
+      "source": "jovd83/plantuml-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "dd49254370c1f6ed601d5bff8f6399200b66a6bbc1f91d8ab4ea073dd1b422ce"
+    }
+  }
+}

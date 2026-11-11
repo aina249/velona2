@@ -1,0 +1,29 @@
+@startuml
+!include ../../../../.agents/skills/plantuml-skill/assets/premium-theme.puml
+header "Vélona — Acteur Visiteur (non connecté)"
+footer "Généré à partir de l'analyse validée (docs/uml/analyse-cas-utilisation.md)"
+
+left to right direction
+
+actor "Visiteur" as V
+
+rectangle "Système Vélona" {
+    usecase "CU-V1\nS'inscrire" as UV1
+    usecase "CU-V2\nSe connecter" as UV2
+    usecase "CU-V3\nTest de vitalité" as UV3
+    usecase "CU-V4\nCoordonnées test" as UV4
+    usecase "CU-V5\nParamètres publics" as UV5
+    usecase "CU-V6\nCréneaux disponibles" as UV6
+}
+
+V --> UV1
+V --> UV2
+V --> UV3
+V --> UV4
+V --> UV5
+V --> UV6
+
+@enduml
+</write_to_file>
+</read_file>
+</write_to_file>

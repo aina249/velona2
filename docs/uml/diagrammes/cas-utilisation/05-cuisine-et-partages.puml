@@ -1,0 +1,37 @@
+@startuml
+!include ../../../../.agents/skills/plantuml-skill/assets/premium-theme.puml
+header "Vélona — Acteur Cuisine et cas partagés"
+footer "Généré à partir de l'analyse validée (docs/uml/analyse-cas-utilisation.md)"
+
+left to right direction
+
+actor "Cuisine" as K
+actor "Client connecté" as C
+actor "Administratrice" as A
+
+rectangle "Système Vélona" {
+    usecase "CU-K1\nGénérer commandes" as UK1
+    usecase "CU-K2\nCommandes date" as UK2
+    usecase "CU-K3\nStatut commande" as UK3
+    usecase "CU-K4\nMàJ lot commandes" as UK4
+    usecase "CU-K5\nListe courses" as UK5
+    usecase "CU-K6\nAbonnés sans menu" as UK6
+
+    usecase "CU-S1\nAccéder photos" as US1
+}
+
+K --> UK1
+K --> UK2
+K --> UK3
+K --> UK4
+K --> UK5
+K --> UK6
+
+C --> US1
+A --> US1
+K --> US1
+
+@enduml
+</write_to_file>
+</read_file>
+</write_to_file>

@@ -1,0 +1,492 @@
+@startuml
+' ============================================================================
+' Diagramme de classes UML — Projet Vélona (Phase 4)
+' Source : analyse-classes.md, 001_init.sql, domain.js, auth.js, routes
+' ============================================================================
+
+skinparam class {
+    BackgroundColor #1a1b26
+    BorderColor #414868
+    HeaderBackgroundColor #24283b
+    AttributeFontColor #c0caf5
+    MethodFontColor #c0caf5
+    FontColor #c0caf5
+    ArrowColor #7aa2f7
+}
+
+skinparam package {
+    BackgroundColor #1a1b26
+    BorderColor #414868
+    FontColor #c0caf5
+}
+
+skinparam enum {
+    BackgroundColor #1a1b26
+    BorderColor #414868
+    FontColor #c0caf5
+}
+
+skinparam defaultFontName "Segoe UI", "Inter", "SansSerif"
+skinparam defaultFontSize 12
+skinparam dpi 300
+skinparam shadowing false
+skinparam roundcorner 10
+
+' ============================================================================
+' PACKAGE METIER
+' ============================================================================
+package "Métier" {
+
+' --- User ---
+class User {
+    {PK} id : serial
+    role : text CHECK ('client','admin','kitchen')
+    email : text UNIQUE
+    phone : text
+    password_hash : text
+    first_name : text
+    last_name : text
+    active : boolean DEFAULT true
+    must_change_password : boolean DEFAULT false
+    created_at : timestamptz
+    last_login_at : timestamptz
+    + checkLogin(email, password)
+    + publicUser()
+    + createSession()
+    + destroySession()
+    + loadUser()
+    + requireAuth()
+    + rateLimit()
+}
+
+' --- ClientProfile ---
+class ClientProfile {
+    {PK}{FK} user_id : int PK, FK→User
+    birth_date : date
+    sex : text
+    nationality : text
+    quartier : text
+    address : text
+    occupation : text
+    activity_level : text
+    follow_channel : text
+    family_status : text
+    household_size : int
+    who_cooks : text
+    food_budget : text
+    reason : text
+    conditions : text[]
+    condition_other : text
+    medication : text
+    allergies : text
+    forbidden_foods : text
+    forbidden_reason : text
+    habits : jsonb
+    expectations : text
+    goals : text
+    meal_interest : text
+    source : text
+    checkin_fields : text[]
+    consent_at : timestamptz
+    last_reminder_at : timestamptz
+    updated_at : timestamptz
+    + cleanProfile()
+    + updateProfile()
+}
+
+' --- VitalityTest ---
+class VitalityTest {
+    {PK} id : serial
+    {FK} user_id : int FK→User (SET NULL)
+    first_name : text
+    contact : text
+    answers : jsonb
+    score : int
+    converted : boolean DEFAULT false
+    created_at : timestamptz
+}
+
+' --- Availability ---
+class Availability {
+    {PK} id : serial
+    weekday : int CHECK (0-6)
+    start_time : time
+    end_time : time
+}
+
+' --- Appointment ---
+class Appointment {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    starts_at : timestamptz
+    duration_min : int DEFAULT 60
+    format : text CHECK ('cabinet','visio')
+    kind : text CHECK ('bilan','suivi')
+    status : text CHECK ('confirme','termine','annule','absent')
+    client_note : text
+    reminder_sent : boolean DEFAULT false
+    created_at : timestamptz
+}
+
+' --- Consultation ---
+class Consultation {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    {FK} appointment_id : int FK→Appointment (SET NULL)
+    {FK} created_by : int FK→User
+    consulted_at : date
+    weight : numeric(5,1)
+    height : numeric(5,1)
+    waist : numeric(5,1)
+    hip : numeric(5,1)
+    bp : text
+    hr : int
+    fat_pct : numeric(4,1)
+    muac : text
+    peds : jsonb
+    glucose : text
+    albumin : text
+    cholesterol : text
+    triglycerides : text
+    hemoglobin : text
+    bio_date : date
+    other_tests : text
+    observations : text
+    assessment : text
+    conclusion : text
+    program_prescribed : text
+    meals_prescribed : text
+    next_appointment : date
+    fee : text
+    internal_notes : text
+    created_at : timestamptz
+    updated_at : timestamptz
+    + cleanConsultation()
+}
+
+' --- Program ---
+class Program {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    kind : text CHECK ('30','60','90')
+    start_date : date
+    end_date : date
+    goal_label : text
+    metric : text CHECK ('weight','waist','glucose')
+    start_value : numeric(6,2)
+    target_value : numeric(6,2)
+    status : text CHECK ('actif','termine','pause','annule')
+    created_at : timestamptz
+    + activeProgram()
+    + progress()
+}
+
+' --- CheckIn ---
+class CheckIn {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    created_at : timestamptz
+    weight : numeric(5,1)
+    waist : numeric(5,1)
+    energy : int CHECK (1-5)
+    sleep : text CHECK ('faible','moyen','bon')
+    glucose : numeric(5,2)
+    bp : text
+    note : text
+    photo : text
+    reviewed_at : timestamptz
+    review_note : text
+}
+
+' --- Meal ---
+class Meal {
+    {PK} id : serial
+    name : text
+    description : text
+    meal_type : text CHECK ('petit-dejeuner','dejeuner','diner','collation')
+    tags : text[]
+    profiles : text[]
+    ingredients : jsonb
+    active : boolean DEFAULT true
+    created_at : timestamptz
+    + cleanMeal()
+}
+
+' --- MenuPlan ---
+class MenuPlan {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    week_start : date UNIQUE(client_id, week_start)
+    items : jsonb [{day, slot, meal_id}]
+    note : text
+    updated_at : timestamptz
+    + menuWithMeals()
+}
+
+' --- MealSubscription ---
+class MealSubscription {
+    {PK}{FK} client_id : int PK, FK→User
+    formula : text CHECK ('essentiel','equilibre','serenite')
+    delivery_days : text[]
+    address : text
+    quartier : text
+    instructions : text
+    status : text CHECK ('actif','pause','arrete')
+    started_at : date
+    updated_at : timestamptz
+}
+
+' --- MealOrder ---
+class MealOrder {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    delivery_date : date UNIQUE(client_id, delivery_date)
+    items : jsonb [{day, slot, meal_id, name}]
+    status : text CHECK ('a_preparer','pret','en_livraison','livre','incident')
+    address : text
+    quartier : text
+    instructions : text
+    incident_note : text
+    created_at : timestamptz
+    updated_at : timestamptz
+    + generateOrders()
+    + shoppingList()
+}
+
+' --- Message ---
+class Message {
+    {PK} id : serial
+    {FK} client_id : int FK→User
+    {FK} sender_id : int FK→User (SET NULL)
+    body : text
+    photo : text
+    automatic : boolean DEFAULT false
+    created_at : timestamptz
+    read_at : timestamptz
+}
+
+' --- Invoice ---
+class Invoice {
+    {PK} id : serial
+    number : text UNIQUE
+    {FK} client_id : int FK→User (RESTRICT)
+    label : text
+    items : jsonb
+    amount_mga : int CHECK >= 0
+    status : text CHECK ('en_attente','declaree','payee','annulee')
+    method : text
+    payment_ref : text
+    issued_at : timestamptz
+    due_date : date
+    declared_at : timestamptz
+    paid_at : timestamptz
+    + createInvoice()
+}
+
+}
+
+' ============================================================================
+' PACKAGE TECHNIQUE
+' ============================================================================
+package "Technique" {
+
+class Session {
+    {PK} token_hash : text
+    {FK} user_id : int FK→User
+    expires_at : timestamptz
+    created_at : timestamptz
+    + createSession()
+    + destroySession()
+    + loadUser()
+}
+
+class Settings {
+    {PK} key : text
+    value : jsonb
+    + getSettings()
+    + saveSettings()
+}
+
+class EmailLog {
+    {PK} id : serial
+    to_addr : text
+    subject : text
+    status : text
+    error : text
+    created_at : timestamptz
+}
+
+}
+
+' ============================================================================
+' ENUMERATIONS
+' ============================================================================
+
+enum UserRole {
+    'client'
+    'admin'
+    'kitchen'
+}
+
+enum AppointmentFormat {
+    'cabinet'
+    'visio'
+}
+
+enum AppointmentKind {
+    'bilan'
+    'suivi'
+}
+
+enum AppointmentStatus {
+    'confirme'
+    'termine'
+    'annule'
+    'absent'
+}
+
+enum ProgramKind {
+    '30'
+    '60'
+    '90'
+}
+
+enum ProgramMetric {
+    'weight'
+    'waist'
+    'glucose'
+}
+
+enum ProgramStatus {
+    'actif'
+    'termine'
+    'pause'
+    'annule'
+}
+
+enum CheckInSleep {
+    'faible'
+    'moyen'
+    'bon'
+}
+
+enum MealType {
+    'petit-dejeuner'
+    'dejeuner'
+    'diner'
+    'collation'
+}
+
+enum MealSubscriptionFormula {
+    'essentiel'
+    'equilibre'
+    'serenite'
+}
+
+enum MealSubscriptionStatus {
+    'actif'
+    'pause'
+    'arrete'
+}
+
+enum MealOrderStatus {
+    'a_preparer'
+    'pret'
+    'en_livraison'
+    'livre'
+    'incident'
+}
+
+enum InvoiceStatus {
+    'en_attente'
+    'declaree'
+    'payee'
+    'annulee'
+}
+
+enum ClientProfileConditions {
+    'diabete'
+    'hypertension'
+    'surpoids'
+    'digestif'
+    'grossesse'
+    'cholesterol'
+    'anemie'
+    'autre'
+}
+
+' ============================================================================
+' RELATIONS
+' ============================================================================
+
+' R1: User 1 : 0..* Session
+User "1" o-- "0..*" Session : possède
+
+' R2: User 1 : 0..1 ClientProfile
+User "1" o-- "0..1" ClientProfile : a
+
+' R3: User 1 : 0..* VitalityTest
+User "1" o-- "0..*" VitalityTest : passe
+
+' R4: User 1 : 0..* Appointment
+User "1" o-- "0..*" Appointment : prend
+
+' R5: User 1 : 0..* Consultation (client)
+User "1" o-- "0..*" Consultation : fait
+
+' R6: User 1 : 0..* Consultation (créateur)
+User "1" o-- "0..*" Consultation : crée
+
+' R7: Appointment 1 : 0..1 Consultation
+Appointment "1" o-- "0..1" Consultation : génère
+
+' R8: User 1 : 0..* Program
+User "1" o-- "0..*" Program : suit
+
+' R9: User 1 : 0..* CheckIn
+User "1" o-- "0..*" CheckIn : réalise
+
+' R10: User 1 : 0..* MenuPlan
+User "1" o-- "0..*" MenuPlan : possède
+
+' R11: User 1 : 0..1 MealSubscription
+User "1" o-- "0..1" MealSubscription : souscrit
+
+' R12: User 1 : 0..* MealOrder
+User "1" o-- "0..*" MealOrder : commande
+
+' R13: User 1 : 0..* Message (client)
+User "1" o-- "0..*" Message : reçoit
+
+' R14: User 1 : 0..* Message (expéditeur)
+User "1" o-- "0..*" Message : envoie
+
+' R15: User 1 : 0..* Invoice
+User "1" o-- "0..*" Invoice : reçoit
+
+' R16: Meal 1 : 0..* MenuPlan (via JSONB items)
+Meal "1" ..> "0..*" MenuPlan : référencé dans items (JSONB)
+
+' R17: Meal 1 : 0..* MealOrder (via JSONB items)
+Meal "1" ..> "0..*" MealOrder : référencé dans items (JSONB)
+
+' ============================================================================
+' LIENS VERS ENUMERATIONS (dépendance)
+' ============================================================================
+
+User ..> UserRole : rôle
+Appointment ..> AppointmentFormat : format
+Appointment ..> AppointmentKind : type
+Appointment ..> AppointmentStatus : statut
+Program ..> ProgramKind : durée
+Program ..> ProgramMetric : indicateur
+Program ..> ProgramStatus : statut
+CheckIn ..> CheckInSleep : sommeil
+Meal ..> MealType : type
+MealSubscription ..> MealSubscriptionFormula : formule
+MealSubscription ..> MealSubscriptionStatus : statut
+MealOrder ..> MealOrderStatus : statut
+Invoice ..> InvoiceStatus : statut
+ClientProfile ..> ClientProfileConditions : antécédents
+
+@enduml

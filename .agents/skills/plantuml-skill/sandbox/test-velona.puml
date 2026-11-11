@@ -1,0 +1,24 @@
+﻿@startuml
+title Test UML - Projet Velona
+
+class Client {
+  +id: int
+  +nom: string
+  +email: string
+}
+
+class RendezVous {
+  +id: int
+  +date: Date
+  +statut: string
+}
+
+class Repas {
+  +id: int
+  +nom: string
+}
+
+Client "1" -- "0..*" RendezVous : réserve
+Client "1" -- "0..*" Repas : reçoit
+
+@enduml

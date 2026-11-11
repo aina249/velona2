@@ -1,0 +1,137 @@
+@startuml
+!include ../../../../.agents/skills/plantuml-skill/assets/premium-theme.puml
+header "Vélona — Vue générale des cas d'utilisation"
+footer "Généré à partir de l'analyse validée (docs/uml/analyse-cas-utilisation.md)"
+
+left to right direction
+
+actor "Visiteur" as V
+actor "Client connecté" as C
+actor "Administratrice" as A
+actor "Cuisine" as K
+
+rectangle "Système Vélona" {
+    usecase "CU-V1\nS'inscrire" as UV1
+    usecase "CU-V2\nSe connecter" as UV2
+    usecase "CU-V3\nTest de vitalité" as UV3
+    usecase "CU-V4\nCoordonnées test" as UV4
+    usecase "CU-V5\nParamètres publics" as UV5
+    usecase "CU-V6\nCréneaux disponibles" as UV6
+
+    usecase "CU-C1\nSe déconnecter" as UC1
+    usecase "CU-C2\nProfil utilisateur" as UC2
+    usecase "CU-C3\nChanger mot de passe" as UC3
+    usecase "CU-C4\nTableau de bord" as UC4
+    usecase "CU-C5\nFiche renseignements" as UC5
+    usecase "CU-C6\nCheck-in hebdo" as UC6
+    usecase "CU-C7\nHistorique check-ins" as UC7
+    usecase "CU-C8\nMenu semaine" as UC8
+    usecase "CU-C9\nAbonnement repas" as UC9
+    usecase "CU-C10\nLivraisons" as UC10
+    usecase "CU-C11\nRendez-vous" as UC11
+    usecase "CU-C12\nRéserver RDV" as UC12
+    usecase "CU-C13\nAnnuler RDV" as UC13
+    usecase "CU-C14\nMessagerie" as UC14
+    usecase "CU-C15\nFactures" as UC15
+    usecase "CU-C16\nDéclarer paiement" as UC16
+    usecase "CU-C17\nSemaines disponibles" as UC17
+
+    usecase "CU-A1\nDashboard cockpit" as UA1
+    usecase "CU-A2\nGérer clients" as UA2
+    usecase "CU-A3\nCréer client" as UA3
+    usecase "CU-A4\nRéinitialiser MDp" as UA4
+    usecase "CU-A5\nRédiger consultation" as UA5
+    usecase "CU-A6\nCréer programme" as UA6
+    usecase "CU-A7\nModifier programme" as UA7
+    usecase "CU-A8\nConsulter check-ins" as UA8
+    usecase "CU-A9\nRéviser check-in" as UA9
+    usecase "CU-A10\nBibliothèque repas" as UA10
+    usecase "CU-A11\nMenus par client" as UA11
+    usecase "CU-A12\nAbonnement client" as UA12
+    usecase "CU-A13\nAgenda" as UA13
+    usecase "CU-A14\nDisponibilités" as UA14
+    usecase "CU-A15\nMessagerie admin" as UA15
+    usecase "CU-A16\nFactures" as UA16
+    usecase "CU-A17\nProspects" as UA17
+    usecase "CU-A18\nParamètres système" as UA18
+    usecase "CU-A19\nPersonnel" as UA19
+    usecase "CU-A20\nLogs emails" as UA20
+
+    usecase "CU-K1\nGénérer commandes" as UK1
+    usecase "CU-K2\nCommandes date" as UK2
+    usecase "CU-K3\nStatut commande" as UK3
+    usecase "CU-K4\nMàJ lot commandes" as UK4
+    usecase "CU-K5\nListe courses" as UK5
+    usecase "CU-K6\nAbonnés sans menu" as UK6
+
+    usecase "CU-S1\nAccéder photos" as US1
+}
+
+V --> UV1
+V --> UV2
+V --> UV3
+V --> UV4
+V --> UV5
+V --> UV6
+
+C --> UC1
+C --> UC2
+C --> UC3
+C --> UC4
+C --> UC5
+C --> UC6
+C --> UC7
+C --> UC8
+C --> UC9
+C --> UC10
+C --> UC11
+C --> UC12
+C --> UC13
+C --> UC14
+C --> UC15
+C --> UC16
+C --> UC17
+
+A --> UA1
+A --> UA2
+A --> UA3
+A --> UA4
+A --> UA5
+A --> UA6
+A --> UA7
+A --> UA8
+A --> UA9
+A --> UA10
+A --> UA11
+A --> UA12
+A --> UA13
+A --> UA14
+A --> UA15
+A --> UA16
+A --> UA17
+A --> UA18
+A --> UA19
+A --> UA20
+
+K --> UK1
+K --> UK2
+K --> UK3
+K --> UK4
+K --> UK5
+K --> UK6
+
+C --> US1
+A --> US1
+K --> US1
+
+A ..> UK1 : accès croisé
+A ..> UK2 : accès croisé
+A ..> UK3 : accès croisé
+A ..> UK4 : accès croisé
+A ..> UK5 : accès croisé
+A ..> UK6 : accès croisé
+
+@enduml
+</write_to_file>
+</read_file>
+</write_to_file>

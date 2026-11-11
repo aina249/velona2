@@ -1,0 +1,57 @@
+@startuml
+!include ../../../../.agents/skills/plantuml-skill/assets/premium-theme.puml
+header "Vélona — Acteur Administratrice (cockpit)"
+footer "Généré à partir de l'analyse validée (docs/uml/analyse-cas-utilisation.md)"
+
+left to right direction
+
+actor "Administratrice" as A
+
+rectangle "Système Vélona" {
+    usecase "CU-A1\nDashboard cockpit" as UA1
+    usecase "CU-A2\nGérer clients" as UA2
+    usecase "CU-A3\nCréer client" as UA3
+    usecase "CU-A4\nRéinitialiser MDp" as UA4
+    usecase "CU-A5\nRédiger consultation" as UA5
+    usecase "CU-A6\nCréer programme" as UA6
+    usecase "CU-A7\nModifier programme" as UA7
+    usecase "CU-A8\nConsulter check-ins" as UA8
+    usecase "CU-A9\nRéviser check-in" as UA9
+    usecase "CU-A10\nBibliothèque repas" as UA10
+    usecase "CU-A11\nMenus par client" as UA11
+    usecase "CU-A12\nAbonnement client" as UA12
+    usecase "CU-A13\nAgenda" as UA13
+    usecase "CU-A14\nDisponibilités" as UA14
+    usecase "CU-A15\nMessagerie admin" as UA15
+    usecase "CU-A16\nFactures" as UA16
+    usecase "CU-A17\nProspects" as UA17
+    usecase "CU-A18\nParamètres système" as UA18
+    usecase "CU-A19\nPersonnel" as UA19
+    usecase "CU-A20\nLogs emails" as UA20
+}
+
+A --> UA1
+A --> UA2
+A --> UA3
+A --> UA4
+A --> UA5
+A --> UA6
+A --> UA7
+A --> UA8
+A --> UA9
+A --> UA10
+A --> UA11
+A --> UA12
+A --> UA13
+A --> UA14
+A --> UA15
+A --> UA16
+A --> UA17
+A --> UA18
+A --> UA19
+A --> UA20
+
+@enduml
+</write_to_file>
+</read_file>
+</write_to_file>
