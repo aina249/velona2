@@ -3,6 +3,7 @@ import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
 import PublicHeader from "./PublicHeader";
+import { FooterContactDetails } from "./PublicContactDetails";
 
 export default function Programmes() {
   return (
@@ -170,11 +171,7 @@ export default function Programmes() {
             <div>
               <p className="vac-footer-title">Contact</p>
               <p className="vac-footer-desc">
-                WhatsApp : [NUMÉRO]
-                <br />
-                E-mail : [ADRESSE]
-                <br />
-                Livraison : Antananarivo centre
+                <FooterContactDetails />
               </p>
             </div>
             <div>

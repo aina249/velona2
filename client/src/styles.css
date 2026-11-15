@@ -5207,3 +5207,155 @@ textarea.input {
     margin-left: auto;
   }
 }
+
+/* Coordonnées publiques et accès WhatsApp. */
+.vac-contact-value-link {
+  color: var(--green);
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.vac-contact-value-link:hover,
+.vac-contact-value-link:focus-visible {
+  color: var(--terra-dark);
+}
+
+.vac-contact-form-note {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.vac-whatsapp-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  background: #1f6b4f;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(31, 107, 79, 0.28);
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.vac-whatsapp-fab:hover,
+.vac-whatsapp-fab:focus-visible {
+  color: #fff;
+  background: #164f3a;
+  box-shadow: 0 16px 32px rgba(31, 107, 79, 0.34);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 700px) {
+  .vac-whatsapp-fab {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    min-height: 46px;
+    padding-inline: 16px;
+  }
+}
+
+/* Sections de conversion : informations pratiques et parcours illustratifs. */
+.vac-practical,
+.vac-parcours {
+  padding: var(--section-space) 0;
+}
+
+.vac-practical {
+  background: var(--white);
+}
+
+.vac-practical-grid,
+.vac-parcours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 20px;
+}
+
+.vac-practical-card,
+.vac-parcours-card {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid #e8e2d6;
+  border-radius: 26px;
+  background: var(--cream);
+}
+
+.vac-practical-card svg,
+.vac-parcours-card svg {
+  margin-bottom: 18px;
+  color: var(--terra);
+}
+
+.vac-practical-card h3,
+.vac-parcours-card h3 {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-family: var(--font-head);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.vac-practical-card p,
+.vac-parcours-card p {
+  margin: 0;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+.vac-parcours {
+  background: #e3eee7;
+}
+
+.vac-parcours-note {
+  max-width: 700px;
+  margin: 14px auto 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.vac-parcours-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.vac-parcours-card span {
+  margin-top: 18px;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.vac-practical-cta,
+.vac-parcours-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vac-practical-card:hover,
+  .vac-parcours-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 38px rgba(31, 107, 79, 0.12);
+  }
+}
+
+@media (max-width: 700px) {
+  .vac-practical-card,
+  .vac-parcours-card {
+    padding: 24px 20px;
+  }
+}

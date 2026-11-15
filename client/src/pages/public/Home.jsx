@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
+import { whatsappLink } from "../../lib/publicContact";
 import PublicHeader from "./PublicHeader";
+import { FooterContactDetails } from "./PublicContactDetails";
 
 export default function Home() {
   return (
@@ -28,10 +30,15 @@ export default function Home() {
               <Icon name="heart" size={20} />
               Faire mon test de vitalité · 3 min
             </ButtonLink>
-            <ButtonLink to="/contact" variant="outline">
+            <a
+              className="btn btn-o"
+              href={whatsappLink("Bonjour Vélona, je souhaite réserver un bilan nutritionnel.")}
+              target="_blank"
+              rel="noreferrer"
+            >
               <Icon name="calendar" size={20} />
               Réserver mon bilan
-            </ButtonLink>
+            </a>
           </div>
           <div className="vac-stats">
             <div>
@@ -339,6 +346,60 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="vac-parcours">
+        <div className="vac-container">
+          <div className="vac-section-head vac-text-center">
+            <p className="vac-eyebrow">Parcours illustratifs</p>
+            <h2 className="vac-h2">Un accompagnement qui part de votre quotidien</h2>
+            <p className="vac-parcours-note">
+              Illustrations fictives inspirées des objectifs fréquents. Chaque
+              accompagnement est personnalisé et les résultats varient selon
+              chaque personne.
+            </p>
+          </div>
+          <div className="vac-parcours-grid">
+            <article className="vac-parcours-card fade-up">
+              <Icon name="bolt" size={30} />
+              <h3>Retrouver de l’énergie</h3>
+              <p>
+                Faire le point sur le rythme des repas, le sommeil et les
+                habitudes qui comptent le plus au quotidien.
+              </p>
+              <span>Le bilan, puis un suivi simple chaque semaine.</span>
+            </article>
+            <article className="vac-parcours-card fade-up">
+              <Icon name="menu" size={30} />
+              <h3>Mieux organiser ses repas</h3>
+              <p>
+                Construire des repas adaptés à votre rythme, avec des idées de
+                menus et une livraison possible.
+              </p>
+              <span>Un cadre souple, pensé pour durer.</span>
+            </article>
+            <article className="vac-parcours-card fade-up">
+              <Icon name="heart" size={30} />
+              <h3>Préparer un objectif santé</h3>
+              <p>
+                Poser un objectif réaliste avec Annick et avancer pas à pas,
+                au cabinet ou en visio.
+              </p>
+              <span>Des décisions éclairées, sans régime extrême.</span>
+            </article>
+          </div>
+          <div className="vac-parcours-cta">
+            <a
+              className="btn btn-p"
+              href={whatsappLink("Bonjour Vélona, je souhaite échanger sur mon objectif nutritionnel.")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="message" size={19} />
+              Parler de mon objectif
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="vac-nutritionniste">
         <div className="vac-container">
           <div className="vac-nutritionniste-row">
@@ -382,9 +443,14 @@ export default function Home() {
                 un accompagnement humain chaque semaine.
               </p>
               <div className="vac-nutritionniste-cta">
-                <ButtonLink to="/contact" variant="primary">
+                <a
+                  className="btn btn-p"
+                  href={whatsappLink("Bonjour Vélona, je souhaite réserver un bilan avec Annick.")}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Réserver mon bilan avec Annick
-                </ButtonLink>
+                </a>
                 <ButtonLink to="/a-propos" variant="outline">
                   Découvrir son approche
                 </ButtonLink>
@@ -441,11 +507,7 @@ export default function Home() {
             <div>
               <p className="vac-footer-title">Contact</p>
               <p className="vac-footer-desc">
-                WhatsApp : [NUMÉRO]
-                <br />
-                E-mail : [ADRESSE]
-                <br />
-                Livraison : Antananarivo centre
+                <FooterContactDetails />
               </p>
             </div>
             <div>

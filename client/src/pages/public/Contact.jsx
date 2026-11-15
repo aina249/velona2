@@ -2,7 +2,17 @@ import React, { useId, useState } from "react";
 import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
+import {
+  PRACTICAL_INFORMATION,
+  PUBLIC_CONTACT,
+  whatsappLink,
+} from "../../lib/publicContact";
 import PublicHeader from "./PublicHeader";
+import {
+  EmailLink,
+  FooterContactDetails,
+  WhatsAppLink,
+} from "./PublicContactDetails";
 
 const FAQS = [
   {
@@ -27,7 +37,7 @@ const FAQS = [
   },
   {
     q: "Quels sont les moyens de paiement ?",
-    a: "Paiement par mobile money ou carte bancaire, selon la formule choisie.",
+    a: "Le règlement peut se faire par Mobile Money (MVola, Orange Money ou Airtel Money), en espèces ou par virement. Après paiement, indiquez votre référence afin qu’elle soit confirmée.",
   },
 ];
 
@@ -57,6 +67,22 @@ function FaqItem({ question, answer }) {
 }
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const lines = [
+      "Bonjour Vélona,",
+      "",
+      `Nom : ${form.name.trim()}`,
+      form.email.trim() ? `E-mail : ${form.email.trim()}` : null,
+      "",
+      `Message : ${form.message.trim()}`,
+    ].filter(Boolean);
+
+    window.open(whatsappLink(lines.join("\n")), "_blank", "noopener,noreferrer");
+  }
+
   return (
     <div className="vac-home">
       <PublicHeader activePath="/contact" />
@@ -99,6 +125,48 @@ export default function Contact() {
         </div>
       </section>
 
+      <section className="vac-practical">
+        <div className="vac-container">
+          <div className="vac-section-head vac-text-center">
+            <p className="vac-eyebrow">Informations pratiques</p>
+            <h2 className="vac-h2">Tout est prêt pour votre premier bilan</h2>
+          </div>
+          <div className="vac-practical-grid">
+            <article className="vac-practical-card fade-up">
+              <Icon name="calendar" size={28} />
+              <h3>Votre bilan</h3>
+              <p>{PRACTICAL_INFORMATION.consultation}</p>
+            </article>
+            <article className="vac-practical-card fade-up">
+              <Icon name="clock" size={28} />
+              <h3>Horaires</h3>
+              <p>{PRACTICAL_INFORMATION.schedule}</p>
+            </article>
+            <article className="vac-practical-card fade-up">
+              <Icon name="pin" size={28} />
+              <h3>Réserver sereinement</h3>
+              <p>{PRACTICAL_INFORMATION.booking}</p>
+            </article>
+            <article className="vac-practical-card fade-up">
+              <Icon name="invoice" size={28} />
+              <h3>Paiement</h3>
+              <p>{PRACTICAL_INFORMATION.payment}</p>
+            </article>
+          </div>
+          <div className="vac-practical-cta">
+            <a
+              className="btn btn-p"
+              href={whatsappLink("Bonjour Vélona, je souhaite demander un créneau pour un bilan nutritionnel.")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="calendar" size={19} />
+              Demander un créneau sur WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="vac-container">
         <div className="vac-section-head">
           <div>
@@ -112,57 +180,99 @@ export default function Contact() {
               <Icon name="phone" size={20} />
               <div>
                 <p className="vac-contact-label">WhatsApp</p>
-                <p className="vac-contact-value">[NUMÉRO]</p>
+                <p className="vac-contact-value">
+                  <WhatsAppLink
+                    className="vac-contact-value-link"
+                    message="Bonjour Vélona, j'aimerais avoir plus d'informations."
+                  />
+                </p>
+              </div>
+            </div>
+            <div className="vac-contact-item">
+              <Icon name="pin" size={20} />
+              <div>
+                <p className="vac-contact-label">Cabinet</p>
+                <p className="vac-contact-value">
+                  {PUBLIC_CONTACT.cabinetAddress}
+                </p>
               </div>
             </div>
             <div className="vac-contact-item">
               <Icon name="message" size={20} />
               <div>
                 <p className="vac-contact-label">E-mail</p>
-                <p className="vac-contact-value">[ADRESSE]</p>
+                <p className="vac-contact-value">
+                  <EmailLink className="vac-contact-value-link" />
+                </p>
               </div>
             </div>
             <div className="vac-contact-item">
-              <Icon name="map-pin" size={20} />
+              <Icon name="truck" size={20} />
               <div>
                 <p className="vac-contact-label">Livraison</p>
-                <p className="vac-contact-value">Antananarivo centre</p>
+                <p className="vac-contact-value">
+                  {PUBLIC_CONTACT.deliveryArea}
+                </p>
               </div>
             </div>
           </div>
           <div className="vac-contact-form">
-            <form className="vac-contact-form-inner">
+            <form className="vac-contact-form-inner" onSubmit={handleSubmit}>
               <div className="vac-field">
-                <label className="vac-field-label">Votre nom</label>
+                <label className="vac-field-label" htmlFor="contact-name">
+                  Votre nom
+                </label>
                 <input
+                  id="contact-name"
                   className="vac-field-input"
                   type="text"
                   placeholder="Jean Rakoto"
+                  required
+                  value={form.name}
+                  onChange={(event) =>
+                    setForm((current) => ({ ...current, name: event.target.value }))
+                  }
                 />
               </div>
               <div className="vac-field">
-                <label className="vac-field-label">Votre e-mail</label>
+                <label className="vac-field-label" htmlFor="contact-email">
+                  Votre e-mail <span aria-hidden="true">(facultatif)</span>
+                </label>
                 <input
+                  id="contact-email"
                   className="vac-field-input"
                   type="email"
                   placeholder="jean@example.com"
+                  value={form.email}
+                  onChange={(event) =>
+                    setForm((current) => ({ ...current, email: event.target.value }))
+                  }
                 />
               </div>
               <div className="vac-field">
-                <label className="vac-field-label">Votre message</label>
+                <label className="vac-field-label" htmlFor="contact-message">
+                  Votre message
+                </label>
                 <textarea
+                  id="contact-message"
                   className="vac-field-textarea"
                   rows={4}
                   placeholder="Décrivez votre besoin…"
+                  required
+                  value={form.message}
+                  onChange={(event) =>
+                    setForm((current) => ({ ...current, message: event.target.value }))
+                  }
                 />
               </div>
-              <ButtonLink
-                to="/test"
-                variant="primary"
-                className="vac-submit-btn"
-              >
-                Envoyer le message
-              </ButtonLink>
+              <button type="submit" className="btn btn-p vac-submit-btn">
+                <Icon name="message" size={19} />
+                Envoyer sur WhatsApp
+              </button>
+              <p className="vac-contact-form-note">
+                Votre message s’ouvrira dans WhatsApp ; aucune donnée n’est
+                enregistrée par ce formulaire.
+              </p>
             </form>
           </div>
         </div>
@@ -184,13 +294,14 @@ export default function Contact() {
             <ButtonLink to="/test" variant="white">
               Faire le test
             </ButtonLink>
-            <ButtonLink
-              to="/contact"
-              variant="white"
-              className="vac-cta-btn-second"
+            <a
+              className="btn btn-w vac-cta-btn-second"
+              href={whatsappLink("Bonjour Vélona, je souhaite réserver un bilan nutritionnel.")}
+              target="_blank"
+              rel="noreferrer"
             >
               Réserver un bilan
-            </ButtonLink>
+            </a>
           </div>
         </div>
       </section>
@@ -224,11 +335,7 @@ export default function Contact() {
             <div>
               <p className="vac-footer-title">Contact</p>
               <p className="vac-footer-desc">
-                WhatsApp : [NUMÉRO]
-                <br />
-                E-mail : [ADRESSE]
-                <br />
-                Livraison : Antananarivo centre
+                <FooterContactDetails />
               </p>
             </div>
             <div>

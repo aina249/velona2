@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
+import { Icon } from "../../ui/icons";
 import { useAuth } from "../../lib/auth";
+import { whatsappLink } from "../../lib/publicContact";
 
 const NAVIGATION = [
   ["/", "Accueil"],
@@ -16,8 +18,9 @@ export default function PublicHeader({ activePath }) {
   const { user } = useAuth();
 
   return (
-    <header className="vac-header">
-      <div className="vac-header-inner">
+    <>
+      <header className="vac-header">
+        <div className="vac-header-inner">
         <Link to="/" className="vac-brand" aria-label="Vélona, accueil">
           <img src="/symbol.png" alt="" width="30" height="30" />
           <img src="/wordmark.png" alt="Vélona" height="22" />
@@ -47,7 +50,18 @@ export default function PublicHeader({ activePath }) {
             Faire le test gratuit
           </ButtonLink>
         </div>
-      </div>
-    </header>
+        </div>
+      </header>
+      <a
+        className="vac-whatsapp-fab"
+        href={whatsappLink("Bonjour Vélona, j'aimerais en savoir plus sur vos programmes.")}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Écrire à Vélona sur WhatsApp"
+      >
+        <Icon name="message" size={18} />
+        WhatsApp
+      </a>
+    </>
   );
 }

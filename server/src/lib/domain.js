@@ -9,7 +9,7 @@ const { HttpError } = require('./http');
 
 // ---------- Paramètres ----------
 const DEFAULT_SETTINGS = {
-  cabinet: { name: 'Vélona', practitioner: 'Annick Tchuidjang', title: 'Nutritionniste', address: '', city: 'Antananarivo', phone: '', whatsapp: '', email: '' },
+  cabinet: { name: 'Vélona', practitioner: 'Annick Tchuidjang', title: 'Nutritionniste', address: 'Ivandry, Antananarivo', city: 'Antananarivo', phone: '', whatsapp: '+261 38 08 320 20', email: 'randriamasinjakaandriniaina@gmail.com' },
   prices: { bilan: 0, suivi: 0, programme_30: 0, programme_60: 0, programme_90: 0, essentiel: 0, equilibre: 0, serenite: 0, livraison: 0 },
   payment: { mvola: '', orange_money: '', airtel_money: '', instructions: 'Indiquez votre nom et le numéro de facture en référence du paiement.' },
   agenda: { slot_minutes: 60, min_notice_hours: 12, days_ahead: 21 },
