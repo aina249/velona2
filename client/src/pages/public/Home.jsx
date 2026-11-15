@@ -5,6 +5,7 @@ import { Icon } from "../../ui/icons";
 import { whatsappLink } from "../../lib/publicContact";
 import PublicHeader from "./PublicHeader";
 import { FooterContactDetails } from "./PublicContactDetails";
+import MotionCarousel from "./MotionCarousel";
 
 export default function Home() {
   return (
@@ -61,23 +62,28 @@ export default function Home() {
             src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
             alt=""
             className="vac-hero-logo"
+            decoding="async"
           />
           <div className="vac-float float2">
             <img
               src="/assets/b709240e3771d02fe73bfceb4081e83d.jpg"
               alt="Écran Menus de la semaine de l'application Vélona"
+              decoding="async"
             />
           </div>
           <div className="vac-float float1">
             <img
               src="/assets/5e5d6aa832fba37544447d717c4d883d.jpg"
               alt="Tableau de bord client de l'application Vélona"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
           <div className="vac-float float3">
             <img
               src="/assets/f91289445a3f709ebc8cfed53319cf69.jpg"
               alt="Résultat du test de vitalité"
+              decoding="async"
             />
           </div>
         </div>
@@ -156,6 +162,8 @@ export default function Home() {
                 <img
                   src="/assets/e1683b31616d5b21b789bfb8336e6a18.jpg"
                   alt="Écran de réservation du bilan"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="vac-service-body">
@@ -172,6 +180,8 @@ export default function Home() {
                 <img
                   src="/assets/6d8aea6bbdc9c39dbba7cae5a7494c89.jpg"
                   alt="Écran de suivi détaillé"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="vac-service-body">
@@ -190,6 +200,8 @@ export default function Home() {
                 <img
                   src="/assets/ebbe43bc23c1796148e2df2b5464cdb5.jpg"
                   alt="Écran de choix de la formule repas"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="vac-service-body">
@@ -217,45 +229,7 @@ export default function Home() {
               votre téléphone.
             </p>
           </div>
-          <div className="vac-marquee-window">
-            <div className="vac-marquee">
-            <img
-              src="/assets/942d99f8b39ecd234f5a51825e0a4df4.jpg"
-              alt="Écran Test de vitalité"
-            />
-            <img
-              src="/assets/f91289445a3f709ebc8cfed53319cf69.jpg"
-              alt="Écran Résultat"
-            />
-            <img
-              src="/assets/5e5d6aa832fba37544447d717c4d883d.jpg"
-              alt="Écran Tableau de bord"
-            />
-            <img
-              src="/assets/16e40a1b88fa7643b2dc9ffa0962cd58.jpg"
-              alt="Écran Check-in"
-            />
-            <img
-              src="/assets/b709240e3771d02fe73bfceb4081e83d.jpg"
-              alt="Écran Menus"
-            />
-            <img
-              src="/assets/35934aa8a3521032d36867936477fe43.jpg"
-              alt="Écran Messages"
-            />
-            <img
-              src="/assets/8acc73a904775ee512ea6be802116e33.jpg"
-              alt="Écran Profil"
-            />
-            <img src="/assets/942d99f8b39ecd234f5a51825e0a4df4.jpg" alt="" />
-            <img src="/assets/f91289445a3f709ebc8cfed53319cf69.jpg" alt="" />
-            <img src="/assets/5e5d6aa832fba37544447d717c4d883d.jpg" alt="" />
-            <img src="/assets/16e40a1b88fa7643b2dc9ffa0962cd58.jpg" alt="" />
-            <img src="/assets/b709240e3771d02fe73bfceb4081e83d.jpg" alt="" />
-            <img src="/assets/35934aa8a3521032d36867936477fe43.jpg" alt="" />
-              <img src="/assets/8acc73a904775ee512ea6be802116e33.jpg" alt="" />
-            </div>
-          </div>
+          <MotionCarousel />
         </div>
       </section>
 
@@ -408,6 +382,8 @@ export default function Home() {
               <img
                 src="/assets/b6e44ca90dfa7a2c0b07f1af5853d642.jpg"
                 alt="Annick Tchuidjang, nutritionniste, au cabinet Vélona"
+                loading="lazy"
+                decoding="async"
               />
               <div className="vac-nutritionniste-badge">
                 <span
@@ -466,6 +442,8 @@ export default function Home() {
             src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
             alt=""
             className="vac-cta-logo"
+            loading="lazy"
+            decoding="async"
           />
           <h2 className="vac-h2 vac-white">Prêt à vous sentir vivant ?</h2>
           <p className="vac-lead vac-white-soft">

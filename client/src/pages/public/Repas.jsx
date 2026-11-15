@@ -4,6 +4,7 @@ import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
 import PublicHeader from "./PublicHeader";
 import { FooterContactDetails } from "./PublicContactDetails";
+import { whatsappLink } from "../../lib/publicContact";
 
 export default function Repas() {
   return (
@@ -33,6 +34,8 @@ export default function Repas() {
             src="/assets/ebbe43bc23c1796148e2df2b5464cdb5.jpg"
             alt="Écran de choix de la formule repas"
             className="vac-hero-img"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
       </section>
@@ -60,9 +63,14 @@ export default function Repas() {
               <li>Produits du marché local</li>
               <li>Livraison à Antananarivo centre</li>
             </ul>
-            <ButtonLink to="/contact" variant="outline">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite commander la formule repas Essentiel.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               Commander Essentiel
-            </ButtonLink>
+            </a>
           </div>
           <div className="vac-formule-card vac-formule-card-featured fade-up">
             <div className="vac-formule-badge">Le plus populaire</div>
@@ -81,9 +89,14 @@ export default function Repas() {
               <li>Produits du marché local</li>
               <li>Livraison à Antananarivo centre</li>
             </ul>
-            <ButtonLink to="/contact" variant="primary">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite commander la formule repas Équilibre.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
               Commander Équilibre
-            </ButtonLink>
+            </a>
           </div>
           <div className="vac-formule-card fade-up">
             <div className="vac-formule-header">
@@ -101,9 +114,14 @@ export default function Repas() {
               <li>Produits du marché local</li>
               <li>Livraison à Antananarivo centre</li>
             </ul>
-            <ButtonLink to="/contact" variant="outline">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite commander la formule repas Sérénité.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               Commander Sérénité
-            </ButtonLink>
+            </a>
           </div>
         </div>
       </section>
@@ -145,6 +163,8 @@ export default function Repas() {
             src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
             alt=""
             className="vac-cta-logo"
+            loading="lazy"
+            decoding="async"
           />
           <h2 className="vac-h2 vac-white">
             Envie de bien manger sans effort ?
@@ -153,9 +173,14 @@ export default function Repas() {
             Commandez vos repas sains livrés à Antananarivo, préparés avec les
             produits du marché.
           </p>
-          <ButtonLink to="/contact" variant="white">
+          <a
+            href={whatsappLink("Bonjour Vélona, je souhaite commander des repas sains livrés.")}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-white"
+          >
             Passer ma commande
-          </ButtonLink>
+          </a>
         </div>
       </section>
 

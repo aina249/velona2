@@ -419,6 +419,41 @@ textarea.input {
   border-color: var(--green);
   box-shadow: 0 0 0 4px rgba(31, 107, 79, 0.12);
 }
+.password-input {
+  position: relative;
+  width: 100%;
+}
+.password-input .password-input-field {
+  padding-right: 56px;
+}
+.password-input-toggle {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--green);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  place-items: center;
+  transform: translateY(-50%);
+}
+.password-input-toggle:hover:not(:disabled) {
+  color: var(--terra-dark);
+  background: var(--terra-soft);
+}
+.password-input-toggle:focus-visible {
+  outline: 3px solid var(--green-soft);
+  outline-offset: -2px;
+}
+.password-input-toggle:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
 .has-error .input {
   border-color: var(--danger);
 }

@@ -158,6 +158,51 @@ export function Input(props) {
 }
 
 /**
+ * Champ de mot de passe avec affichage temporaire et accessible.
+ * L'état visuel reste côté client : la valeur envoyée au serveur est inchangée.
+ *
+ * @param {import("react").InputHTMLAttributes<HTMLInputElement>} props
+ */
+export function PasswordInput({
+  className = "",
+  id,
+  type: _ignoredType,
+  disabled,
+  ...props
+}) {
+  const generatedId = useId();
+  const inputId = id || generatedId;
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleLabel = isVisible
+    ? "Masquer le mot de passe"
+    : "Afficher le mot de passe";
+
+  return (
+    <div className="password-input">
+      <Input
+        {...props}
+        id={inputId}
+        type={isVisible ? "text" : "password"}
+        disabled={disabled}
+        className={`password-input-field ${className}`}
+      />
+      <button
+        type="button"
+        className="password-input-toggle"
+        aria-controls={inputId}
+        aria-label={toggleLabel}
+        aria-pressed={isVisible}
+        title={toggleLabel}
+        disabled={disabled}
+        onClick={() => setIsVisible((visible) => !visible)}
+      >
+        <Icon name={isVisible ? "eye-off" : "eye"} size={20} />
+      </button>
+    </div>
+  );
+}
+
+/**
  * @param {import("react").TextareaHTMLAttributes<HTMLTextAreaElement>} props
  */
 export function Textarea(props) {

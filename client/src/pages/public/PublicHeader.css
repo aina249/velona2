@@ -1,0 +1,187 @@
+/* Navigation publique : bureau étendu, menu compact à partir de la tablette. */
+.vac-public-header .vac-menu-toggle,
+.vac-public-header .vac-mobile-menu {
+  display: none;
+}
+
+/* Même ligne de contenu que le héros et les sections publiques. */
+.vac-public-header .vac-header-inner {
+  max-width: 1320px;
+}
+
+@media (max-width: 1100px) {
+  .vac-public-header {
+    position: sticky;
+  }
+
+  .vac-public-header .vac-header-inner {
+    min-height: 66px;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding-block: 10px;
+  }
+
+  .vac-public-header .vac-nav-desktop,
+  .vac-public-header .vac-header-actions .vac-login-link {
+    display: none;
+  }
+
+  .vac-public-header .vac-header-actions {
+    margin-left: auto;
+  }
+
+  .vac-public-header .vac-header-actions .btn {
+    min-height: 42px;
+    padding-inline: 16px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .vac-public-header .vac-menu-toggle {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    color: var(--green);
+    cursor: pointer;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .vac-public-header .vac-menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 999px;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .vac-public-header .vac-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .vac-public-header .vac-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .vac-public-header .vac-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .vac-public-header .vac-menu-toggle:focus-visible,
+  .vac-public-header .vac-mobile-menu a:focus-visible {
+    outline: 3px solid var(--green-soft);
+    outline-offset: 3px;
+  }
+
+  .vac-public-header .vac-mobile-menu {
+    position: absolute;
+    z-index: 49;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    visibility: hidden;
+    background: rgba(250, 247, 242, 0.98);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 18px 30px rgba(31, 107, 79, 0.11);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: grid-template-rows 240ms ease, opacity 180ms ease,
+      transform 240ms ease, visibility 240ms;
+  }
+
+  .vac-public-header .vac-mobile-menu.is-open {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .vac-public-header .vac-mobile-menu > * {
+    min-height: 0;
+  }
+
+  .vac-public-header .vac-nav-mobile,
+  .vac-public-header .vac-mobile-menu-actions {
+    width: min(100% - 32px, 680px);
+    margin-inline: auto;
+  }
+
+  .vac-public-header .vac-nav-mobile {
+    display: grid;
+    gap: 2px;
+    padding: 16px 0 10px;
+  }
+
+  .vac-public-header .vac-nav-mobile .vac-nav-link {
+    display: flex;
+    min-height: 46px;
+    align-items: center;
+    padding: 10px 4px;
+    font-size: 16px;
+    border-bottom-color: transparent;
+  }
+
+  .vac-public-header .vac-nav-mobile .vac-nav-link-active {
+    border-bottom-color: var(--terra);
+  }
+
+  .vac-public-header .vac-mobile-menu-actions {
+    display: grid;
+    gap: 10px;
+    padding: 16px 0 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .vac-public-header .vac-mobile-login,
+  .vac-public-header .vac-mobile-whatsapp {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-inline: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 14px;
+  }
+
+  .vac-public-header .vac-mobile-login {
+    color: var(--green);
+    background: var(--white);
+    border: 1px solid var(--green);
+  }
+
+  .vac-public-header .vac-mobile-whatsapp {
+    color: var(--green);
+    background: var(--green-soft);
+  }
+}
+
+@media (max-width: 430px) {
+  .vac-public-header .vac-brand img:nth-child(2) {
+    display: none;
+  }
+
+  .vac-public-header .vac-header-actions .btn {
+    padding-inline: 12px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vac-public-header .vac-menu-toggle span,
+  .vac-public-header .vac-mobile-menu {
+    transition: none;
+  }
+}

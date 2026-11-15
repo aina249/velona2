@@ -1,0 +1,71 @@
+.velona-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.velona-reveal--pending {
+  opacity: 0;
+  transition:
+    opacity 560ms var(--ease-out, cubic-bezier(0.2, 0.7, 0.2, 1)) var(--velona-reveal-delay, 0ms),
+    transform 560ms var(--ease-out, cubic-bezier(0.2, 0.7, 0.2, 1)) var(--velona-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.velona-reveal--pending.velona-reveal--up {
+  transform: translateY(20px);
+}
+
+.velona-reveal--pending.velona-reveal--left {
+  transform: translateX(-20px);
+}
+
+.velona-reveal--pending.velona-reveal--right {
+  transform: translateX(20px);
+}
+
+.velona-reveal--pending.velona-reveal--scale {
+  transform: scale(0.98);
+}
+
+.velona-reveal--visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velona-reveal,
+  .velona-reveal--pending,
+  .velona-reveal--visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+.velona-auto-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: none !important;
+  transition:
+    opacity 560ms var(--ease-out, cubic-bezier(0.2, 0.7, 0.2, 1)) var(--velona-auto-reveal-delay, 0ms),
+    transform 560ms var(--ease-out, cubic-bezier(0.2, 0.7, 0.2, 1)) var(--velona-auto-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.velona-auto-reveal--visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velona-auto-reveal,
+  .velona-auto-reveal--visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}

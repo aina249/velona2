@@ -1,0 +1,159 @@
+.motion-carousel {
+  --motion-carousel-gap: clamp(16px, 2vw, 28px);
+  --motion-carousel-duration: 56s;
+  min-width: 0;
+}
+
+.motion-carousel__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.motion-carousel__hint {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.motion-carousel__control {
+  min-height: 36px;
+  padding: 0 12px;
+  color: var(--green);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition: color 180ms ease, background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.motion-carousel__control:hover {
+  color: #fff;
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+.motion-carousel__control:focus-visible,
+.motion-carousel__viewport:focus-visible {
+  outline: 3px solid var(--green-soft);
+  outline-offset: 3px;
+}
+
+.motion-carousel__viewport {
+  overflow: hidden;
+  padding: 10px 4px 24px;
+  border-radius: 22px;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+}
+
+.motion-carousel__track {
+  display: flex;
+  width: max-content;
+  animation: motion-carousel-scroll var(--motion-carousel-duration) linear infinite;
+  will-change: transform;
+}
+
+.motion-carousel__set {
+  display: flex;
+  gap: var(--motion-carousel-gap);
+  padding-right: var(--motion-carousel-gap);
+}
+
+.motion-carousel.is-paused .motion-carousel__track {
+  animation-play-state: paused;
+}
+
+.motion-carousel__item {
+  flex: 0 0 auto;
+  width: clamp(168px, 18vw, 230px);
+  margin: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 18px 38px rgba(31, 107, 79, 0.14);
+}
+
+.motion-carousel__item.is-compact {
+  width: clamp(150px, 16vw, 200px);
+}
+
+.motion-carousel__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes motion-carousel-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-carousel__control {
+    transition: none;
+  }
+
+  .motion-carousel__control:hover {
+    transform: none;
+  }
+
+  .motion-carousel__viewport {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    scrollbar-color: var(--green) transparent;
+    scrollbar-width: thin;
+  }
+
+  .motion-carousel__track {
+    width: max-content;
+    animation: none;
+  }
+
+  .motion-carousel__set.is-clone {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .motion-carousel__toolbar {
+    align-items: flex-start;
+  }
+
+  .motion-carousel__hint {
+    font-size: 13px;
+  }
+
+  .motion-carousel__control {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+
+  .motion-carousel__viewport {
+    padding-bottom: 16px;
+  }
+}

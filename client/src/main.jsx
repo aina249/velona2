@@ -25,6 +25,7 @@ import Rdv from "./pages/client/Rdv";
 import Profil, { Fiche, Factures } from "./pages/client/Profil";
 import Chat from "./pages/shared/Chat";
 import "./styles.css";
+import "./styles/public-polish.css";
 
 // Cockpit et cuisine chargés à la demande (allège l'appli client)
 const AdminApp = lazy(() => import("./pages/admin/AdminApp"));

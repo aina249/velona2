@@ -3,7 +3,7 @@ import { post, put } from '../../lib/api';
 import { useAuth } from '../../lib/auth';
 import { Link } from '../../lib/router';
 import { useLoad, fmtDate, mga, INVOICE_STATUS, PAY_METHODS } from '../../lib/util';
-import { Async, Avatar, Button, Card, Empty, Field, Input, Modal, PageHeader, Pills, StatusBadge, useSubmit, Notice } from '../../ui/kit';
+import { Async, Avatar, Button, Card, Empty, Field, Input, Modal, PageHeader, PasswordInput, Pills, StatusBadge, useSubmit, Notice } from '../../ui/kit';
 import { Icon } from '../../ui/icons';
 import ProfileForm, { profilePayload } from '../shared/ProfileForm';
 
@@ -45,8 +45,8 @@ export function PasswordModal({ onClose }) {
   return (
     <Modal title="Changer mon mot de passe" onClose={onClose} footer={<><Button variant="ghost" onClick={onClose}>Annuler</Button><Button loading={busy} onClick={() => run()}>Enregistrer</Button></>}>
       <div className="stack">
-        <Field label="Mot de passe actuel"><Input type="password" autoComplete="current-password" value={f.current} onChange={(e) => setF({ ...f, current: e.target.value })} /></Field>
-        <Field label="Nouveau mot de passe" hint="8 caractères minimum"><Input type="password" autoComplete="new-password" value={f.next} onChange={(e) => setF({ ...f, next: e.target.value })} /></Field>
+        <Field label="Mot de passe actuel"><PasswordInput autoComplete="current-password" value={f.current} onChange={(e) => setF({ ...f, current: e.target.value })} /></Field>
+        <Field label="Nouveau mot de passe" hint="8 caractères minimum"><PasswordInput autoComplete="new-password" value={f.next} onChange={(e) => setF({ ...f, next: e.target.value })} /></Field>
       </div>
     </Modal>
   );

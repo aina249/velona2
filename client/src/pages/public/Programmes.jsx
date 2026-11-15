@@ -4,6 +4,7 @@ import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
 import PublicHeader from "./PublicHeader";
 import { FooterContactDetails } from "./PublicContactDetails";
+import { whatsappLink } from "../../lib/publicContact";
 
 export default function Programmes() {
   return (
@@ -33,6 +34,8 @@ export default function Programmes() {
             src="/assets/5e5d6aa832fba37544447d717c4d883d.jpg"
             alt="Tableau de bord client de l'application Vélona"
             className="vac-hero-img"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
       </section>
@@ -62,9 +65,14 @@ export default function Programmes() {
               <li>Accès à l'application Vélona</li>
               <li>Support par messagerie</li>
             </ul>
-            <ButtonLink to="/contact" variant="outline">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite choisir le programme Essentiel de 30 jours.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               Choisir Essentiel
-            </ButtonLink>
+            </a>
           </div>
           <div className="vac-programme-card vac-programme-card-featured fade-up">
             <div className="vac-programme-badge">Le plus populaire</div>
@@ -85,9 +93,14 @@ export default function Programmes() {
               <li>Accès à l'application Vélona</li>
               <li>Support par messagerie prioritaire</li>
             </ul>
-            <ButtonLink to="/contact" variant="primary">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite choisir le programme Équilibre de 60 jours.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
               Choisir Équilibre
-            </ButtonLink>
+            </a>
           </div>
           <div className="vac-programme-card fade-up">
             <div className="vac-programme-header">
@@ -108,9 +121,14 @@ export default function Programmes() {
               <li>Support par messagerie prioritaire</li>
               <li>Option repas livrés</li>
             </ul>
-            <ButtonLink to="/contact" variant="outline">
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite choisir le programme Sérénité de 90 jours.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               Choisir Sérénité
-            </ButtonLink>
+            </a>
           </div>
         </div>
       </section>
@@ -121,6 +139,8 @@ export default function Programmes() {
             src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
             alt=""
             className="vac-cta-logo"
+            loading="lazy"
+            decoding="async"
           />
           <h2 className="vac-h2 vac-white">Prêt à commencer ?</h2>
           <p className="vac-lead vac-white-soft">
@@ -131,13 +151,15 @@ export default function Programmes() {
             <ButtonLink to="/test" variant="white">
               Faire le test de vitalité
             </ButtonLink>
-            <ButtonLink
-              to="/contact"
-              variant="white"
+            <a
+              href={whatsappLink("Bonjour Vélona, je souhaite réserver un bilan nutritionnel.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-white"
               style={{ marginLeft: "12px" }}
             >
               Réserver un bilan
-            </ButtonLink>
+            </a>
           </div>
         </div>
       </section>

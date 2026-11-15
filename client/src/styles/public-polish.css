@@ -1,0 +1,243 @@
+/* Couche de finition du site vitrine.
+   Les règles existantes restent intactes ; cette feuille centralise les choix
+   visuels récents pour les pages publiques. */
+.vac-home {
+  --public-space: clamp(56px, 8vw, 112px);
+  --public-radius: 28px;
+  --public-shadow: 0 18px 42px rgba(31, 107, 79, 0.12);
+  --public-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --public-fast: 180ms;
+  --public-standard: 300ms;
+  overflow-x: clip;
+}
+
+.vac-home :where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid #d9774b;
+  outline-offset: 3px;
+}
+
+.vac-home .vac-hero,
+.vac-home .vac-container {
+  width: min(100% - 40px, 1320px);
+}
+
+.vac-home .vac-container {
+  padding-inline: 0;
+}
+
+.vac-home .vac-hero {
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  gap: clamp(32px, 6vw, 88px);
+  min-height: min(720px, calc(100vh - 80px));
+  padding-block: clamp(52px, 7vw, 104px);
+}
+
+.vac-home .vac-hero-text {
+  max-width: 670px;
+}
+
+.vac-home .vac-h1 {
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.vac-home:not(.vac-home--landing) .vac-hero .vac-h1 {
+  max-width: 17ch;
+}
+
+.vac-home .vac-lead {
+  max-width: 580px;
+}
+
+.vac-home .vac-eyebrow {
+  letter-spacing: 0.1em;
+}
+
+.vac-home .vac-cta {
+  gap: 12px;
+}
+
+.vac-home .btn,
+.vac-home .vac-login-link,
+.vac-home .vac-whatsapp-fab {
+  transition-duration: var(--public-standard);
+  transition-timing-function: var(--public-ease);
+}
+
+.vac-home .btn:not(:disabled):hover,
+.vac-home .vac-whatsapp-fab:hover {
+  transform: translateY(-2px);
+}
+
+.vac-home .vac-confiance {
+  position: relative;
+  z-index: 1;
+}
+
+.vac-home .vac-confiance-inner {
+  gap: 12px 22px;
+}
+
+.vac-home .vac-methode,
+.vac-home .vac-services,
+.vac-home .vac-app,
+.vac-home .vac-pourqui,
+.vac-home .vac-parcours,
+.vac-home .vac-nutritionniste,
+.vac-home .vac-practical {
+  padding-block: var(--public-space);
+}
+
+.vac-home .vac-section-head {
+  max-width: 760px;
+}
+
+.vac-home .vac-section-head.vac-text-center {
+  margin-inline: auto;
+}
+
+.vac-home .vac-service-card,
+.vac-home .vac-programme-card,
+.vac-home .vac-formule-card {
+  transition: transform var(--public-standard) var(--public-ease),
+    box-shadow var(--public-standard) var(--public-ease),
+    border-color var(--public-standard) var(--public-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vac-home .vac-service-card:hover,
+  .vac-home .vac-programme-card:hover,
+  .vac-home .vac-formule-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--public-shadow);
+  }
+
+  .vac-home .vac-step-card:hover,
+  .vac-home .vac-pourqui-card:hover,
+  .vac-home .vac-philosophie-card:hover,
+  .vac-home .vac-practical-card:hover,
+  .vac-home .vac-parcours-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.vac-home .vac-nutritionniste-row,
+.vac-home .vac-apropos-row {
+  gap: clamp(36px, 7vw, 96px);
+}
+
+.vac-home .vac-nutritionniste-img img,
+.vac-home .vac-apropos-img img {
+  box-shadow: 0 28px 64px rgba(31, 107, 79, 0.2);
+}
+
+.vac-home .vac-nutritionniste-badge,
+.vac-home .vac-apropos-badge {
+  box-shadow: 0 10px 26px rgba(31, 107, 79, 0.16);
+}
+
+.vac-home .vac-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@keyframes public-cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(194, 94, 51, 0);
+  }
+  40% {
+    box-shadow: 0 0 0 9px rgba(194, 94, 51, 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vac-home--landing .vac-btn-pulse {
+    animation: public-cta-pulse 1.8s ease-out 2;
+  }
+
+  .vac-home--landing .vac-float,
+  .vac-home--landing .vac-hero-logo {
+    will-change: transform;
+    animation-iteration-count: 3;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .vac-home .vac-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+    min-height: 0;
+  }
+
+  .vac-home .vac-h1 {
+    font-size: clamp(42px, 5vw, 58px);
+  }
+}
+
+@media (max-width: 700px) {
+  .vac-home .vac-hero,
+  .vac-home .vac-container {
+    width: min(100% - 32px, 620px);
+  }
+
+  .vac-home .vac-hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding-block: 44px 32px;
+    gap: 28px;
+  }
+
+  .vac-home .vac-hero-text {
+    text-align: left;
+  }
+
+  .vac-home .vac-h1,
+  .vac-home:not(.vac-home--landing) .vac-hero .vac-h1 {
+    max-width: 13ch;
+    font-size: clamp(38px, 11vw, 52px);
+  }
+
+  .vac-home .vac-hero .vac-lead {
+    margin-inline: 0;
+  }
+
+  .vac-home--landing .vac-hero-art {
+    width: min(100%, 390px);
+    height: 400px;
+    margin-inline: auto;
+  }
+
+  .vac-home--landing .vac-float.float2,
+  .vac-home--landing .vac-float.float3 {
+    display: none;
+  }
+
+  .vac-home--landing .vac-float.float1 {
+    width: 62%;
+    margin-left: -31%;
+  }
+
+  .vac-home .vac-stats {
+    gap: 18px;
+    margin-top: 28px;
+  }
+
+  .vac-home .vac-confiance-inner {
+    justify-content: flex-start;
+    padding-inline: 16px;
+  }
+
+  .vac-home .vac-nutritionniste-row,
+  .vac-home .vac-apropos-row {
+    gap: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vac-home .vac-btn-pulse,
+  .vac-home .vac-float,
+  .vac-home .vac-hero-logo {
+    animation: none !important;
+    will-change: auto;
+  }
+}

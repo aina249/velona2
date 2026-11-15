@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth, homeFor } from '../../lib/auth';
 import { Link, navigate, useRoute } from '../../lib/router';
-import { Button, Field, Input, ErrorBox } from '../../ui/kit';
+import { Button, Field, Input, PasswordInput, ErrorBox } from '../../ui/kit';
 import { post } from '../../lib/api';
 
 export function AuthLayout({ children, title, subtitle }) {
@@ -38,7 +38,7 @@ export function Login() {
       <form onSubmit={submit} className="stack">
         <ErrorBox error={error} />
         <Field label="E-mail"><Input type="email" autoComplete="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} /></Field>
-        <Field label="Mot de passe"><Input type="password" autoComplete="current-password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} /></Field>
+        <Field label="Mot de passe"><PasswordInput autoComplete="current-password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} /></Field>
         <Button type="submit" loading={busy} className="block">Se connecter</Button>
       </form>
       <p className="auth-switch">Pas encore de compte ? <Link to="/inscription">Créer mon compte</Link></p>
@@ -75,7 +75,7 @@ export function Register() {
         </div>
         <Field label="Téléphone / WhatsApp" error={fieldErr('téléphone')}><Input type="tel" autoComplete="tel" placeholder="+261 34 …" required value={f.phone} onChange={set('phone')} /></Field>
         <Field label="E-mail" error={fieldErr('e-mail')}><Input type="email" autoComplete="email" required value={f.email} onChange={set('email')} /></Field>
-        <Field label="Mot de passe" hint="8 caractères minimum" error={fieldErr('mot de passe')}><Input type="password" autoComplete="new-password" minLength={8} required value={f.password} onChange={set('password')} /></Field>
+        <Field label="Mot de passe" hint="8 caractères minimum" error={fieldErr('mot de passe')}><PasswordInput autoComplete="new-password" minLength={8} required value={f.password} onChange={set('password')} /></Field>
         <label className={`check ${fieldErr('consentement') ? 'has-error' : ''}`}>
           <input type="checkbox" checked={f.consent} onChange={set('consent')} />
           <span>J'accepte que mes données soient utilisées pour mon suivi nutritionnel. Elles restent confidentielles et ne sont jamais transmises à des tiers.</span>
@@ -106,9 +106,9 @@ export function ForcePassword() {
     <AuthLayout title="Choisissez votre mot de passe" subtitle={`Bonjour ${user.first_name}, remplacez le mot de passe temporaire par le vôtre.`}>
       <form onSubmit={submit} className="stack">
         <ErrorBox error={error} />
-        <Field label="Mot de passe temporaire"><Input type="password" autoComplete="current-password" required value={f.current} onChange={(e) => setF({ ...f, current: e.target.value })} /></Field>
-        <Field label="Nouveau mot de passe" hint="8 caractères minimum"><Input type="password" autoComplete="new-password" minLength={8} required value={f.next} onChange={(e) => setF({ ...f, next: e.target.value })} /></Field>
-        <Field label="Confirmer"><Input type="password" autoComplete="new-password" minLength={8} required value={f.confirm} onChange={(e) => setF({ ...f, confirm: e.target.value })} /></Field>
+        <Field label="Mot de passe temporaire"><PasswordInput autoComplete="current-password" required value={f.current} onChange={(e) => setF({ ...f, current: e.target.value })} /></Field>
+        <Field label="Nouveau mot de passe" hint="8 caractères minimum"><PasswordInput autoComplete="new-password" minLength={8} required value={f.next} onChange={(e) => setF({ ...f, next: e.target.value })} /></Field>
+        <Field label="Confirmer"><PasswordInput autoComplete="new-password" minLength={8} required value={f.confirm} onChange={(e) => setF({ ...f, confirm: e.target.value })} /></Field>
         <Button type="submit" loading={busy} className="block">Enregistrer</Button>
         <Button variant="ghost" onClick={logout}>Se déconnecter</Button>
       </form>

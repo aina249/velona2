@@ -109,6 +109,8 @@ export default function Contact() {
             src="/assets/35934aa8a3521032d36867936477fe43.jpg"
             alt="Écran Messages de l'application Vélona"
             className="vac-hero-img"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
       </section>
@@ -284,6 +286,8 @@ export default function Contact() {
             src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
             alt=""
             className="vac-cta-logo"
+            loading="lazy"
+            decoding="async"
           />
           <h2 className="vac-h2 vac-white">Prêt à commencer ?</h2>
           <p className="vac-lead vac-white-soft">
