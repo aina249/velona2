@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
+import PublicHeader from "./PublicHeader";
 
 export default function Methode() {
   const [revealed, setRevealed] = useState(new Set());
@@ -29,37 +30,7 @@ export default function Methode() {
 
   return (
     <div className="vac-home">
-      <header className="vac-header">
-        <div className="vac-header-inner">
-          <Link to="/" className="vac-brand" aria-label="Vélona, accueil">
-            <img src="/symbol.png" alt="" width="30" height="30" />
-            <img src="/wordmark.png" alt="Vélona" height="22" />
-          </Link>
-          <nav className="vac-nav" aria-label="Navigation principale">
-            <Link to="/" className="vac-nav-link">
-              Accueil
-            </Link>
-            <Link to="/methode" className="vac-nav-link vac-nav-link-active">
-              Notre méthode
-            </Link>
-            <Link to="/programmes" className="vac-nav-link">
-              Programmes
-            </Link>
-            <Link to="/repas" className="vac-nav-link">
-              Repas livrés
-            </Link>
-            <Link to="/a-propos" className="vac-nav-link">
-              À propos
-            </Link>
-            <Link to="/contact" className="vac-nav-link">
-              FAQ & contact
-            </Link>
-          </nav>
-          <ButtonLink to="/test" variant="primary" size="sm">
-            Faire le test gratuit
-          </ButtonLink>
-        </div>
-      </header>
+      <PublicHeader activePath="/methode" />
 
       {/* Présentation */}
       <section

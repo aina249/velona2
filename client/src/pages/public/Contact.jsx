@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useId, useState } from "react";
 import { Link } from "../../lib/router";
 import { ButtonLink } from "../../ui/kit";
 import { Icon } from "../../ui/icons";
+import PublicHeader from "./PublicHeader";
 
 const FAQS = [
   {
@@ -30,40 +31,35 @@ const FAQS = [
   },
 ];
 
+function FaqItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const answerId = useId();
+
+  return (
+    <div className={`vac-faq-card fade-up${isOpen ? " is-open" : ""}`}>
+      <h3 className="vac-faq-question">
+        <button
+          type="button"
+          className="vac-faq-trigger"
+          aria-expanded={isOpen}
+          aria-controls={answerId}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <span>{question}</span>
+          <Icon name="chevron" size={20} className="vac-faq-chevron" />
+        </button>
+      </h3>
+      <div id={answerId} className="vac-faq-answer" aria-hidden={!isOpen}>
+        <p>{answer}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function Contact() {
   return (
     <div className="vac-home">
-      <header className="vac-header">
-        <div className="vac-header-inner">
-          <Link to="/" className="vac-brand" aria-label="Vélona, accueil">
-            <img src="/symbol.png" alt="" width="30" height="30" />
-            <img src="/wordmark.png" alt="Vélona" height="22" />
-          </Link>
-          <nav className="vac-nav" aria-label="Navigation principale">
-            <Link to="/" className="vac-nav-link">
-              Accueil
-            </Link>
-            <Link to="/methode" className="vac-nav-link">
-              Notre méthode
-            </Link>
-            <Link to="/programmes" className="vac-nav-link">
-              Programmes
-            </Link>
-            <Link to="/repas" className="vac-nav-link">
-              Repas livrés
-            </Link>
-            <Link to="/a-propos" className="vac-nav-link">
-              À propos
-            </Link>
-            <Link to="/contact" className="vac-nav-link vac-nav-link-active">
-              FAQ & contact
-            </Link>
-          </nav>
-          <ButtonLink to="/test" variant="primary">
-            Faire le test gratuit
-          </ButtonLink>
-        </div>
-      </header>
+      <PublicHeader activePath="/contact" />
 
       <section className="vac-hero">
         <div className="vac-hero-text">
@@ -97,11 +93,8 @@ export default function Contact() {
           <h2 className="vac-h2">Tout ce que vous voulez savoir</h2>
         </div>
         <div className="vac-faq-grid">
-          {FAQS.map((faq, i) => (
-            <div className="vac-faq-card fade-up" key={i}>
-              <h3 className="vac-faq-question">{faq.q}</h3>
-              <p className="vac-faq-reponse">{faq.a}</p>
-            </div>
+          {FAQS.map((faq) => (
+            <FaqItem key={faq.q} question={faq.q} answer={faq.a} />
           ))}
         </div>
       </section>
