@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { post } from '../../lib/api';
 import { useAuth } from '../../lib/auth';
-import { Link } from '../../lib/router';
 import { Button, ButtonLink, Field, Input, ErrorBox, Notice } from '../../ui/kit';
 import { Icon } from '../../ui/icons';
+import PublicHeader from './PublicHeader';
 
 export const QUESTIONS = [
   { topic: 'Énergie', text: 'Comment est votre énergie au quotidien ?', opts: ['Stable toute la journée', 'Fatigue en fin de journée seulement', 'Fatigue dès le matin, besoin de café', 'Épuisement permanent, même au réveil'], tip: ['Mieux répartir vos repas', 'Pour une énergie plus stable toute la journée.'] },
@@ -65,19 +65,31 @@ export default function Test() {
   };
 
   return (
-    <div className="test-page">
-      <header className="test-top">
-        <Link to={user ? '/app' : '/'} className="auth-brand" aria-label="Vélona"><img src="/symbol.png" alt="" width="36" height="36" /><img src="/wordmark.png" alt="Vélona" height="24" /></Link>
-        {!user ? <Link to="/connexion" className="link">Se connecter</Link> : null}
-      </header>
+    <div className="test-page vac-home test-page--public">
+      <PublicHeader activePath={undefined} ctaLabel="Réserver mon bilan" ctaTo="/contact" />
       <main className="test-main">
         {step === 0 ? (
-          <div className="test-intro fade-up">
-            <span className="chip chip-warm">Gratuit · 3 minutes</span>
-            <h1>Votre test de vitalité</h1>
-            <p className="lead">12 questions sur votre énergie, vos repas, votre sommeil et votre activité. Vous obtenez votre score sur 100 et trois conseils concrets, tout de suite.</p>
-            <Button size="lg" onClick={() => setStep(1)}>Commencer le test</Button>
-          </div>
+          <section className="test-intro fade-up">
+            <div className="test-intro-copy">
+              <span className="test-intro-chip">Gratuit · Sans inscription</span>
+              <p className="test-intro-kicker">12 questions · 3 minutes</p>
+              <h1>Votre test de vitalité</h1>
+              <p className="lead">Faites le point sur votre énergie, vos repas, votre sommeil et votre activité. Repartez avec votre score et trois conseils personnalisés.</p>
+              <ul className="test-intro-topics" aria-label="Les thèmes du test">
+                <li>Énergie</li>
+                <li>Repas</li>
+                <li>Sommeil</li>
+                <li>Activité</li>
+              </ul>
+              <Button size="lg" onClick={() => setStep(1)}>Commencer le test</Button>
+              <p className="test-intro-reassurance">Résultat immédiat · aucune carte bancaire demandée</p>
+            </div>
+            <div className="test-intro-art" aria-hidden="true">
+              <div className="test-intro-art-shape" />
+              <img src="/assets/942d99f8b39ecd234f5a51825e0a4df4.jpg" alt="" />
+              <span>3 min<br />pour faire le point</span>
+            </div>
+          </section>
         ) : null}
 
         {step >= 1 && step <= 12 ? (
@@ -142,6 +154,16 @@ export default function Test() {
           </div>
         ) : null}
       </main>
+      {step === 0 ? (
+        <footer className="test-public-footer">
+          <div className="test-public-footer-inner">
+            <p className="test-public-footer-brand">Vélona</p>
+            <p>Conseils en nutrition et hygiène de vie, ne remplace pas un avis médical.</p>
+            <a href="/contact">FAQ &amp; contact</a>
+            <a href="/connexion">Déjà client ? Se connecter</a>
+          </div>
+        </footer>
+      ) : null}
     </div>
   );
 }

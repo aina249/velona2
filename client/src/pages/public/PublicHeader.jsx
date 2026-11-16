@@ -33,7 +33,11 @@ function NavigationLinks({ activePath, onNavigate }) {
   });
 }
 
-export default function PublicHeader({ activePath }) {
+export default function PublicHeader({
+  activePath,
+  ctaLabel = "Faire le test gratuit",
+  ctaTo = "/test",
+}) {
   const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuId = useId();
@@ -78,8 +82,8 @@ export default function PublicHeader({ activePath }) {
                 Se connecter
               </Link>
             ) : null}
-            <ButtonLink to="/test" variant="primary">
-              Faire le test gratuit
+            <ButtonLink to={ctaTo} variant="primary">
+              {ctaLabel}
             </ButtonLink>
           </div>
 

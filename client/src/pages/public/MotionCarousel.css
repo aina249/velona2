@@ -1,15 +1,18 @@
 .motion-carousel {
   --motion-carousel-gap: clamp(16px, 2vw, 28px);
-  --motion-carousel-duration: 56s;
+  --motion-carousel-duration: 46s;
+  width: 100vw;
   min-width: 0;
+  margin-left: calc(50% - 50vw);
 }
 
 .motion-carousel__toolbar {
+  width: min(100% - 40px, 1320px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 
 .motion-carousel__hint {
@@ -47,8 +50,8 @@
 
 .motion-carousel__viewport {
   overflow: hidden;
-  padding: 10px 4px 24px;
-  border-radius: 22px;
+  padding: 12px 0 10px;
+  border-radius: 0;
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent,
@@ -67,6 +70,7 @@
 
 .motion-carousel__track {
   display: flex;
+  align-items: flex-start;
   width: max-content;
   animation: motion-carousel-scroll var(--motion-carousel-duration) linear infinite;
   will-change: transform;
@@ -74,6 +78,7 @@
 
 .motion-carousel__set {
   display: flex;
+  align-items: flex-start;
   gap: var(--motion-carousel-gap);
   padding-right: var(--motion-carousel-gap);
 }
@@ -82,13 +87,19 @@
   animation-play-state: paused;
 }
 
+.motion-carousel.is-paused .motion-carousel__item {
+  animation-play-state: paused;
+}
+
 .motion-carousel__item {
   flex: 0 0 auto;
   width: clamp(168px, 18vw, 230px);
   margin: 0;
-  overflow: hidden;
-  border-radius: 30px;
-  box-shadow: 0 18px 38px rgba(31, 107, 79, 0.14);
+  overflow: visible;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  will-change: transform;
 }
 
 .motion-carousel__item.is-compact {
@@ -99,6 +110,8 @@
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 28px;
+  filter: drop-shadow(0 18px 28px rgba(31, 107, 79, 0.15));
 }
 
 @keyframes motion-carousel-scroll {
@@ -107,6 +120,31 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes motion-carousel-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -11px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-carousel__item {
+    animation: motion-carousel-bob 6.4s ease-in-out infinite;
+  }
+
+  .motion-carousel__item:nth-child(2n) {
+    animation-delay: -2.2s;
+  }
+
+  .motion-carousel__item:nth-child(3n) {
+    animation-delay: -4.4s;
   }
 }
 
@@ -132,6 +170,11 @@
     animation: none;
   }
 
+  .motion-carousel__item {
+    animation: none;
+    will-change: auto;
+  }
+
   .motion-carousel__set.is-clone {
     display: none;
   }
@@ -139,6 +182,7 @@
 
 @media (max-width: 600px) {
   .motion-carousel__toolbar {
+    width: min(100% - 32px, 620px);
     align-items: flex-start;
   }
 
@@ -154,6 +198,6 @@
   }
 
   .motion-carousel__viewport {
-    padding-bottom: 16px;
+    padding-bottom: 8px;
   }
 }

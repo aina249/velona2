@@ -12,7 +12,13 @@ export default function Methode() {
       <PublicHeader activePath="/methode" />
 
       {/* Présentation */}
-      <Reveal as="section" className="methode-hero">
+      <section className="methode-hero">
+        <img
+          src="/assets/e0ef5960ad04c4b8d8720d585ca27240.png"
+          alt=""
+          aria-hidden="true"
+          className="methode-hero-mark"
+        />
         <div className="methode-hero-inner">
           <div className="methode-hero-text">
             <p className="methode-eyebrow">Notre méthode</p>
@@ -34,7 +40,7 @@ export default function Methode() {
             />
           </div>
         </div>
-      </Reveal>
+      </section>
 
       {/* Étape 01 — Test de vitalité */}
       <Reveal as="section" className="methode-step">
@@ -65,13 +71,22 @@ export default function Methode() {
             </ButtonLink>
           </div>
           <div className="methode-step-art">
-            <img
-              src="/assets/f91289445a3f709ebc8cfed53319cf69.jpg"
-              alt="Résultat du test de vitalité"
-              className="methode-step-img"
-              loading="lazy"
-              decoding="async"
-            />
+            <div className="methode-step-duo">
+              <img
+                src="/assets/942d99f8b39ecd234f5a51825e0a4df4.jpg"
+                alt="Écran Test de vitalité"
+                className="methode-step-img methode-step-img-main"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src="/assets/f91289445a3f709ebc8cfed53319cf69.jpg"
+                alt="Résultat du test de vitalité"
+                className="methode-step-img methode-step-img-side"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </Reveal>
@@ -103,19 +118,21 @@ export default function Methode() {
               <span>Réserver mon bilan</span>
             </a>
           </div>
-          <div className="methode-step-art">
-            <div className="methode-step-duo">
-              <img
-                src="/assets/b6e44ca90dfa7a2c0b07f1af5853d642.jpg"
-                alt="Annick Tchuidjang, nutritionniste"
-                className="methode-step-img methode-step-img-main"
-                loading="lazy"
-                decoding="async"
-              />
+          <div className="methode-step-art methode-step-art--bilan">
+            <div className="methode-bilan-visual">
+              <div className="methode-bilan-portrait">
+                <img
+                  src="/assets/b6e44ca90dfa7a2c0b07f1af5853d642.jpg"
+                  alt="Annick Tchuidjang, nutritionniste"
+                  className="methode-bilan-annick"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <img
                 src="/assets/e1683b31616d5b21b789bfb8336e6a18.jpg"
                 alt="Écran de réservation du bilan"
-                className="methode-step-img methode-step-img-side"
+                className="methode-bilan-phone"
                 loading="lazy"
                 decoding="async"
               />

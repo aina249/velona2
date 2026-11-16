@@ -4704,9 +4704,6 @@ textarea.input {
   gap: clamp(32px, 6vw, 64px);
   align-items: center;
 }
-.methode-step-alt .methode-step-inner {
-  grid-template-columns: 1fr 1fr;
-}
 .methode-step-badge {
   font-family: var(--font-head);
   font-size: 44px;

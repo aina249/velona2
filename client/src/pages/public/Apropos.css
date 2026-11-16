@@ -255,6 +255,10 @@
 }
 
 .vac-about-page .about-timeline::before {
+  display: none;
+}
+
+.vac-about-page .about-timeline ol::before {
   position: absolute;
   top: 12px;
   bottom: 14px;
@@ -452,15 +456,6 @@
   margin: 0;
 }
 
-.vac-about-page .about-intro > .vac-container,
-.vac-about-page .about-purpose > .vac-container,
-.vac-about-page .about-pillars > .vac-container,
-.vac-about-page .about-journey > .vac-container,
-.vac-about-page .about-cta > .vac-container {
-  width: min(100% - 40px, 1180px);
-  margin-inline: auto;
-}
-
 .vac-about-page .about-intro {
   display: block;
   padding-block: clamp(54px, 8vw, 112px) clamp(64px, 9vw, 124px);
@@ -539,6 +534,7 @@
 }
 
 .vac-about-page .about-timeline ol {
+  position: relative;
   margin: 32px 0 0;
   padding: 0;
   list-style: none;
@@ -567,20 +563,6 @@
 }
 
 @media (max-width: 700px) {
-  .vac-about-page .about-pillars-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .vac-about-page .about-intro > .vac-container,
-  .vac-about-page .about-purpose > .vac-container,
-  .vac-about-page .about-pillars > .vac-container,
-  .vac-about-page .about-journey > .vac-container,
-  .vac-about-page .about-cta > .vac-container {
-    width: min(100% - 32px, 620px);
-  }
-
   .vac-about-page .about-pillars-grid {
     grid-template-columns: minmax(0, 1fr);
   }

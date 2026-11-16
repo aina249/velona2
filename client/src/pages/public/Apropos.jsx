@@ -44,14 +44,14 @@ const PILLARS = [
 
 const JOURNEY = [
   {
-    year: "À confirmer",
-    title: "Formation en nutrition",
-    description: "Établissement et année à valider avec Annick.",
+    year: "[Année]",
+    title: "[Formation en nutrition — établissement]",
+    description: "",
   },
   {
-    year: "À confirmer",
-    title: "Expérience professionnelle",
-    description: "Parcours professionnel à valider avec Annick.",
+    year: "[Année]",
+    title: "[Expérience professionnelle]",
+    description: "",
   },
   {
     year: "2026",
@@ -110,7 +110,7 @@ export default function Apropos() {
           <div className="vac-container">
             <div className="about-purpose-copy fade-up">
               <p className="about-kicker">Pourquoi Vélona ?</p>
-              <p className="about-word">vélona</p>
+              <p className="about-word">velona</p>
               <p className="about-word-meaning">
                 en malgache : <strong>vivant, en vie</strong>
               </p>
@@ -165,7 +165,7 @@ export default function Apropos() {
                     <p className="about-timeline-year">{item.year}</p>
                     <div className="about-timeline-copy">
                       <h3>{item.title}</h3>
-                      <p>{item.description}</p>
+                      {item.description ? <p>{item.description}</p> : null}
                     </div>
                   </li>
                 ))}
