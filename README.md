@@ -108,6 +108,33 @@ docker compose up -d --build
 docker compose exec app node src/seed.js --admin --meals --hours
 ```
 
+### Connexion avec Google et Facebook
+
+La connexion sociale est optionnelle et reste désactivée tant que les variables
+OAuth ne sont pas renseignées dans `server/.env`. Les secrets ne doivent jamais
+être ajoutés au dépôt ou au client web.
+
+1. Créez une application web dans [Google Cloud](https://console.cloud.google.com/)
+   puis renseignez `GOOGLE_OAUTH_CLIENT_ID` et `GOOGLE_OAUTH_CLIENT_SECRET`.
+2. Créez une application « Facebook Login » dans
+   [Meta for Developers](https://developers.facebook.com/), activez les
+   permissions `public_profile` et `email`, puis renseignez
+   `FACEBOOK_OAUTH_APP_ID` et `FACEBOOK_OAUTH_APP_SECRET`.
+3. Dans les deux consoles, ajoutez exactement les URI de redirection suivantes,
+   en remplaçant le domaine si nécessaire :
+
+   ```text
+   https://app.velona.mg/api/auth/oauth/google/callback
+   https://app.velona.mg/api/auth/oauth/facebook/callback
+   ```
+
+4. Vérifiez que `APP_URL` correspond au domaine public HTTPS de l'application,
+   puis redémarrez le serveur.
+
+Le flux ne conserve aucun jeton des fournisseurs. Il ouvre une session Vélona
+uniquement pour un compte client déjà créé avec la même adresse e-mail, afin de
+préserver le recueil de consentement effectué à l'inscription.
+
 ---
 
 ## 3. Sauvegardes (à mettre en place dès le premier client)

@@ -28,6 +28,17 @@ const config = {
   mailFrom: process.env.MAIL_FROM || 'Vélona <no-reply@velona.mg>',
   timezone: process.env.APP_TIMEZONE || 'Indian/Antananarivo',
   sessionDays: 30,
+  oauth: {
+    google: {
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || '',
+    },
+    facebook: {
+      appId: process.env.FACEBOOK_OAUTH_APP_ID || '',
+      appSecret: process.env.FACEBOOK_OAUTH_APP_SECRET || '',
+      graphVersion: process.env.FACEBOOK_GRAPH_VERSION || 'v27.0',
+    },
+  },
 };
 
 // ---------- Base de données ----------

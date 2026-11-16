@@ -3,11 +3,25 @@ const { db, config, sha256, randomToken, verifyPassword } = require('./core');
 const { HttpError } = require('./http');
 
 const COOKIE = 'vsid';
+const OAUTH_STATE_COOKIE = 'voauth';
+
+function appendCookie(res, parts) {
+  if (config.cookieSecure) parts.push('Secure');
+  const value = parts.join('; ');
+  const existing = res.getHeader('Set-Cookie');
+  res.setHeader('Set-Cookie', existing ? (Array.isArray(existing) ? [...existing, value] : [existing, value]) : value);
+}
 
 function setSessionCookie(res, token, maxAgeSec) {
-  const parts = [`${COOKIE}=${token}`, 'Path=/', 'HttpOnly', 'SameSite=Lax', `Max-Age=${maxAgeSec}`];
-  if (config.cookieSecure) parts.push('Secure');
-  res.setHeader('Set-Cookie', parts.join('; '));
+  appendCookie(res, [`${COOKIE}=${token}`, 'Path=/', 'HttpOnly', 'SameSite=Lax', `Max-Age=${maxAgeSec}`]);
+}
+
+function setOAuthStateCookie(res, state) {
+  appendCookie(res, [`${OAUTH_STATE_COOKIE}=${state}`, 'Path=/api/auth/oauth', 'HttpOnly', 'SameSite=Lax', 'Max-Age=600']);
+}
+
+function clearOAuthStateCookie(res) {
+  appendCookie(res, [`${OAUTH_STATE_COOKIE}=`, 'Path=/api/auth/oauth', 'HttpOnly', 'SameSite=Lax', 'Max-Age=0']);
 }
 
 async function createSession(res, userId) {
@@ -69,4 +83,7 @@ const publicUser = (u) => u && ({
   must_change_password: u.must_change_password,
 });
 
-module.exports = { createSession, destroySession, loadUser, requireAuth, rateLimit, clientIp, checkLogin, publicUser };
+module.exports = {
+  createSession, destroySession, loadUser, requireAuth, rateLimit, clientIp, checkLogin, publicUser,
+  setOAuthStateCookie, clearOAuthStateCookie,
+};

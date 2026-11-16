@@ -2,6 +2,7 @@
 const { db, v, config, hashPassword, verifyPassword, todayLocal, addDays } = require('../lib/core');
 const { HttpError } = require('../lib/http');
 const auth = require('../lib/auth');
+const oauth = require('../lib/oauth');
 const { getSettings } = require('../lib/domain');
 const { notify } = require('../lib/mailer');
 
@@ -46,6 +47,12 @@ async function availableSlots() {
 const VITALITY_QUESTIONS = 12;
 
 module.exports = (r) => {
+  // Lancement et retour des connexions Google / Facebook. Ces routes font une
+  // redirection navigateur, elles ne répondent donc pas en JSON.
+  r.get('/api/auth/oauth/providers', async () => ({ providers: oauth.availableProviders() }));
+  r.get('/api/auth/oauth/:provider', async (req, res) => oauth.start(req, res, req.params.provider));
+  r.get('/api/auth/oauth/:provider/callback', async (req, res) => oauth.callback(req, res, req.params.provider));
+
   r.post('/api/auth/register', async (req, res) => {
     auth.rateLimit('register:' + auth.clientIp(req), 10);
     const b = req.body;
